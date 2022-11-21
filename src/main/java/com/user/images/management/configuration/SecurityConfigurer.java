@@ -37,17 +37,6 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private PasswordEncoder bCryptPasswordEncoder;
 
-//	@Override
-//	protected void configure(HttpSecurity http) throws Exception {
-//		http.authorizeRequests().antMatchers("/home", "/console/**").permitAll()
-//				.antMatchers("/", "/register/**", "/add-user/**").authenticated().antMatchers("/users/**", "/user/**")
-//				.hasAuthority(Role.ADMIN.name()).anyRequest().permitAll().and().formLogin().loginPage("/login")
-//				.defaultSuccessUrl("/").usernameParameter("username").passwordParameter("password").and().logout()
-//				.logoutSuccessUrl("/login").and().exceptionHandling().accessDeniedPage("/403").and().csrf().disable();
-//
-//		http.sessionManagement().maximumSessions(1).maxSessionsPreventsLogin(true)
-//				.expiredUrl("/login?error=You are already logged in from somewhere");
-//	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

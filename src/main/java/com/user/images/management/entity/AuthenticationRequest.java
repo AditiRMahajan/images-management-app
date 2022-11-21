@@ -1,19 +1,11 @@
 package com.user.images.management.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Data
 public class AuthenticationRequest {
 
-    private String username;
-    private String password;
-    
+	private String username;
+	private String password;
+
 }
