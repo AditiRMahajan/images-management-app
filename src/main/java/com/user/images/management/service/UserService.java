@@ -6,10 +6,10 @@ import com.user.images.management.entity.User;
 
 public interface UserService {
 	
-    // Save operation
+    // Save User
     User saveUser(User user);
  
-    // Read operation
+    // Read Users
     List<User> fetchUsers();
     
     // Find User by id

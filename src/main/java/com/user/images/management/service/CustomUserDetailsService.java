@@ -21,15 +21,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 		this.userRepository = userRepository;
 	}
 
-//	@Override
-//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//		User user = userRepository.findByEmail(username);
-//		if (user == null) {
-//			throw new UsernameNotFoundException(String.format("User with %s doesn't exist!", username));
-//		}
-//		return new UserAdapter(user);
-//	}
-
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		com.user.images.management.entity.User user = this.userRepository.findByEmail(userName);

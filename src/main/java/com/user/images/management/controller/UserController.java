@@ -30,15 +30,15 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
-    @Autowired
-    JwtUtil jwtTokenUtil;
 
-    @Autowired
-    CustomUserDetailsService myUserDetailsService;
+	@Autowired
+	JwtUtil jwtTokenUtil;
 
-    @Autowired
-    AuthenticationManager authenticationManager;
+	@Autowired
+	CustomUserDetailsService myUserDetailsService;
+
+	@Autowired
+	AuthenticationManager authenticationManager;
 
 	@GetMapping("/home")
 	public String defaultPage() {
@@ -58,7 +58,7 @@ public class UserController {
 			result = "error=Enter valid email";
 		} else if (user.getPassword() == null || user.getPassword().trim().isEmpty()) {
 			result = "error=Enter valid password";
-		} 
+		}
 		if (dbUser == null) {
 			userService.saveUser(user);
 		} else {
@@ -68,7 +68,7 @@ public class UserController {
 		return result;
 	}
 
-	// Read operation
+	// Read All users
 	@GetMapping("/users")
 	public List<User> fetchAllUsers() {
 		return userService.fetchUsers();
@@ -79,24 +79,22 @@ public class UserController {
 	private User getUser(@PathVariable("id") Long id) {
 		return userService.getUserById(id);
 	}
-	
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
-            );
-        }
-        catch (BadCredentialsException e){
-            throw new Exception("Incorrect UserName or Password !",e);
-        }
 
-        final UserDetails userDetails = myUserDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
+	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
+			throws Exception {
+		try {
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+					authenticationRequest.getUsername(), authenticationRequest.getPassword()));
+		} catch (BadCredentialsException e) {
+			throw new Exception("Incorrect UserName or Password !", e);
+		}
 
-        final String jwt = jwtTokenUtil.generateToken(userDetails);
+		final UserDetails userDetails = myUserDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
-    }
+		final String jwt = jwtTokenUtil.generateToken(userDetails);
+
+		return ResponseEntity.ok(new AuthenticationResponse(jwt));
+	}
 
 }
