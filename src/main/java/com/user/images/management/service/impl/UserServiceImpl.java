@@ -1,4 +1,4 @@
-package com.user.images.management.service;
+package com.user.images.management.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.user.images.management.entity.User;
 import com.user.images.management.repository.UserRepository;
+import com.user.images.management.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
